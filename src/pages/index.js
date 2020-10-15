@@ -39,9 +39,12 @@ const IndexPage = () => {
 
     return(
         <main>
-            <div className={styles.background}>
-                <BackgroundCanvas/>
-            </div>
+            {
+                typeof window !== 'undefined' &&
+                <div className={styles.background}>
+                    <BackgroundCanvas/>
+                </div>
+            }
             <div className={styles.slimContainer}>
                 <div className={styles.centeredItems}>
                     <h1 className={styles.mainHeading}>Kreiraj novi zadatak</h1>
