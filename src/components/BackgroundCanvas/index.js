@@ -58,8 +58,11 @@ class MathNumber{
 }
 
 const BackgroundCanvas = () => {
-    const canvasWidth = window.innerWidth;
-    const canvasHeight = window.innerHeight;
+    let canvasWidth, canvasHeight;
+    if(typeof window != 'undefined'){
+        canvasWidth = window.innerWidth;
+        canvasHeight = window.innerHeight;
+    }
 
     const number1 = new MathNumber(Math.floor(Math.random() * (canvasWidth + 1)), Math.floor(Math.random() * (canvasHeight + 1)), 1, 60, '#2A095F', canvasWidth, canvasHeight, false, false)
     const number2 = new MathNumber(Math.floor(Math.random() * (canvasWidth + 1)), Math.floor(Math.random() * (canvasHeight + 1)), 200, 70, '#3D02BD', canvasWidth, canvasHeight, false, false)
