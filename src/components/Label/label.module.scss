@@ -1,0 +1,11 @@
+.label{
+    display:flex;
+    flex-direction: column;
+    width: 300px;
+    margin-bottom:50px;
+    > span{
+        display: inline-block;
+        margin-bottom:10px;
+        color:#555555;
+    }
+}

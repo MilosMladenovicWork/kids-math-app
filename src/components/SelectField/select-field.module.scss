@@ -1,0 +1,54 @@
+.select-field{
+    font-size:1.25rem;
+    position:relative;
+    background:white;
+    padding:15px;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+}
+
+.options{
+    border-radius: 5px;
+    max-height: 0;
+    transition: 0.3s;
+    overflow: hidden;
+    background:white;
+    width:100%;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.15);
+    z-index:10;
+    > .option{
+        padding:15px;
+        cursor: pointer;
+    }
+    > .option:hover{
+        background:#EEEEEE;
+    }
+}
+
+.selected-value{
+    cursor: pointer;
+}
+
+.appear-on-bottom{
+    position:absolute;
+    top:calc(1.25rem + 30px + 5px);
+    left:0;
+}
+
+.appear-on-top{
+    position:absolute;
+    bottom:calc(1.25rem + 30px + 5px);
+    left:0;
+    box-shadow: 0 -5px 6px rgba(0, 0, 0, 0.15);
+}
+
+.select-field-extended{
+    .options{
+        max-height:200px;
+        overflow-y: auto;
+    }
+}
+
+.placeholder{
+    color:#757575;
+}
