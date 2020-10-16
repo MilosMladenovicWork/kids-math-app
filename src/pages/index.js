@@ -40,7 +40,9 @@ const IndexPage = () => {
     return(
         <main>
             <div className={styles.background}>
-                <BackgroundCanvas/>
+                {typeof window != 'undefined' &&
+                    <BackgroundCanvas/>
+                }
             </div>
             <div className={styles.slimContainer}>
                 <div className={styles.centeredItems}>
