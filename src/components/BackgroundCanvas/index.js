@@ -1,11 +1,15 @@
 import React from 'react'
 import Sketch from 'react-p5'
 
+import styles from './background-canvas.module.scss'
+
 class MathNumber{
 
     constructor(x, y, character, textSize, color, canvasWidth, canvasHeight, directionDown=true, directionRight=true){
         this.x = x
         this.y = y
+        this.targetX = undefined
+        this.targetY = undefined
         this.color = color
         this.canvasWidth = canvasWidth
         this.canvasHeight = canvasHeight
@@ -47,13 +51,45 @@ class MathNumber{
             this.y-= this.yMovement
         }
 
-        let dx = this.targetSize - this.textSize
-        this.textSize += dx * 0.05
+        let dSize = this.targetSize - this.textSize
+        this.textSize += dSize * 0.05
+        
+        if(this.targetX != undefined){
+            if(this.targetX > this.x){
+                this.x += 10
+            }else{
+                this.x -= 10
+            }
+            if(this.x + 10 >= this.targetX && this.x - 10 <= this.targetX){
+                this.targetX = undefined
+            }
+        }
+        if(this.targetY != undefined){
+            if(this.targetY > this.y){
+                this.y += 10
+            }else{
+                this.y -= 10
+            }
+            if(this.y + 10 >= this.targetY && this.y - 10 <= this.targetY){
+                this.targetY = undefined
+            }
+        }
     }
     scale(times){
-        if(this.targetSize <= this.canvasWidth && this.targetSize <= this.canvasHeight && this.targetSize <= 300){
-            this.targetSize = this.textSize * times
+        let bigger = Math.floor(Math.random() * 2) != 0
+        if(bigger){
+            if(this.targetSize <= this.canvasWidth && this.targetSize <= this.canvasHeight && this.targetSize <= 300){
+                this.targetSize = this.textSize * times
+            }
+        }else{
+            if(this.targetSize > 24){
+                this.targetSize = this.textSize / times
+            }
         }
+    }
+    follow(x, y){
+        this.targetX = x
+        this.targetY = y
     }
 }
 
@@ -93,7 +129,7 @@ const BackgroundCanvas = () => {
         number10.render(p5)
     };
 
-    function mouseClicked(){
+    function mouseClicked(e){
         number1.scale(1.5)  
         number2.scale(1.5)  
         number3.scale(1.5)  
@@ -103,11 +139,25 @@ const BackgroundCanvas = () => {
         number7.scale(1.5)  
         number8.scale(1.5)  
         number9.scale(1.5)  
-        number10.scale(1.5)  
+        number10.scale(1.5)
+        
+        number1.follow(e.mouseX, e.mouseY)  
+        number2.follow(e.mouseX, e.mouseY)  
+        number3.follow(e.mouseX, e.mouseY)  
+        number4.follow(e.mouseX, e.mouseY)  
+        number5.follow(e.mouseX, e.mouseY)  
+        number6.follow(e.mouseX, e.mouseY)  
+        number7.follow(e.mouseX, e.mouseY)  
+        number8.follow(e.mouseX, e.mouseY)  
+        number9.follow(e.mouseX, e.mouseY)  
+        number10.follow(e.mouseX, e.mouseY)
+
     }
 
     return(
-        <Sketch setup={setup} draw={draw} mouseClicked={mouseClicked}/>
+        <div className={styles.backgroundCanvas}>
+            <Sketch setup={setup} draw={draw} mouseClicked={(e) => mouseClicked(e)}/>
+        </div>
     )
 }
 

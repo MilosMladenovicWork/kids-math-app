@@ -9,6 +9,10 @@ import SecondaryButton from '../components/SecondaryButton'
 import { navigate } from 'gatsby'
 import BackgroundCanvas from '../components/BackgroundCanvas'
 
+const BackgroundCanvasMemo = React.memo((props) => {
+    return <BackgroundCanvas />
+})
+
 const IndexPage = () => {
 
     const [typeOfGame, setTypeOfGame] = useState('')
@@ -41,7 +45,7 @@ const IndexPage = () => {
         <main>
             <div className={styles.background}>
                 {typeof window != 'undefined' &&
-                    <BackgroundCanvas/>
+                    <BackgroundCanvasMemo/>
                 }
             </div>
             <div className={styles.slimContainer}>
