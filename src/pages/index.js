@@ -8,6 +8,7 @@ import PrimaryButton from '../components/PrimaryButton'
 import SecondaryButton from '../components/SecondaryButton'
 import { navigate } from 'gatsby'
 import BackgroundCanvas from '../components/BackgroundCanvas'
+import {useDispatch, useSelector} from 'react-redux'
 
 const BackgroundCanvasMemo = React.memo((props) => {
     return <BackgroundCanvas />
@@ -15,30 +16,50 @@ const BackgroundCanvasMemo = React.memo((props) => {
 
 const IndexPage = () => {
 
-    const [typeOfGame, setTypeOfGame] = useState('')
-    const [numberOfCharactersInNumber, setNumberOfCharactersInNumber] = useState()
-    const [numberOfNumbersPerTask, setNumberOfNumbersPerTask] = useState('')
-    const [numberOfTasksPerGame, setNumberOfTasksPerGame] = useState('')
-    const [speed, setSpeed] = useState('')
+    const dispatch = useDispatch()
+
+    let typeOfGame = useSelector(state => state.typeOfGame)
+    let numberOfCharactersPerNumber = useSelector(state => state.numberOfCharactersPerNumber)
+    let numberOfNumbersPerTask = useSelector(state => state.numberOfNumbersPerTask)
+    let numberOfTasksPerGame = useSelector(state => state.numberOfTasksPerGame)
+    let speed = useSelector(state => state.speed)
+
+    const setTypeOfGame = (value) => {
+        dispatch({type:'NEW_VALUE_FOR_TYPE_OF_GAME', payload: value})
+    }
+
+    const setNumberOfCharactersPerNumber = (value) => {
+        dispatch({type: 'NEW_VALUE_FOR_NUMBER_OF_CHARACTERS_PER_NUMBER', payload: value})
+    }
+
+    const setNumberOfNumbersPerTask = (value) => {
+        dispatch({type: 'NEW_VALUE_FOR_NUMBER_OF_NUMBERS_PER_TASK', payload: value})
+    }
+
+    const setNumberOfTasksPerGame = (value) => {
+        dispatch({type: 'NEW_VALUE_FOR_NUMBER_OF_TASKS_PER_GAME', payload: value})
+    }
+
+    const setSpeed = (value) => {
+        dispatch({type: 'NEW_VALUE_FOR_SPEED', payload: value})
+    } 
 
     const cancelInputs = () => {
         setTypeOfGame('')
-        setNumberOfCharactersInNumber('')
+        setNumberOfCharactersPerNumber('')
         setNumberOfNumbersPerTask('')
         setNumberOfTasksPerGame('')
         setSpeed('')
     }
 
-    console.log(typeOfGame ,numberOfCharactersInNumber, numberOfNumbersPerTask, numberOfTasksPerGame,speed)
-
     const confirmInputs = () => {
         if(fieldsFilled()){
-            navigate('/google')
+            navigate('/sabiranje-oduzimanje')
         }
     }
 
     const fieldsFilled = () => {
-        return typeOfGame && numberOfCharactersInNumber && numberOfNumbersPerTask && numberOfTasksPerGame && speed
+        return typeOfGame && numberOfCharactersPerNumber && numberOfNumbersPerTask && numberOfTasksPerGame && speed
     }
 
     return(
@@ -54,18 +75,18 @@ const IndexPage = () => {
                     <Label text={'Tip zadatka'}>
                         <SelectField value={typeOfGame} onChange={(value) => setTypeOfGame(value)} options={[
                             {
-                                value: 'sabiranjeOduzimanje',
+                                value: 'sabiranje-oduzimanje',
                                 text: 'Sabiranje Oduzimanje'
                             },
                             {
-                                value: 'abakusRacunanje',
+                                value: 'abakus-racunanje',
                                 text: 'Abakus Racunanje' 
                             }
                         ]}/>
                     </Label>
                     <div className={styles.rowContainer}>
                         <Label text={'Broj cifara'}>
-                            <NumberInputField value={numberOfCharactersInNumber} onChange={(value) => setNumberOfCharactersInNumber(value)}/>
+                            <NumberInputField value={numberOfCharactersPerNumber} onChange={(value) => setNumberOfCharactersPerNumber(value)}/>
                         </Label>
                         <Label text={'Brojeva po zadatku'}>
                             <NumberInputField value={numberOfNumbersPerTask} onChange={(value) => setNumberOfNumbersPerTask(value)}/>
