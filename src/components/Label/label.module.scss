@@ -9,3 +9,13 @@
         color:#555555;
     }
 }
+
+.row{
+    flex-direction: row;
+    align-items: center;
+    margin-bottom:0;
+    > span{
+        margin:0;
+        margin-right:10px;
+    }
+}
