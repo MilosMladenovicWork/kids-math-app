@@ -25,3 +25,32 @@
     background: #E5E5FF;
     border-radius: 20px;
 }
+
+.game-navigation{
+    position:absolute;
+    top:20px;
+    left:20px;
+}
+
+.correct-answer-counter{
+    svg path{
+        stroke:#00F4CC;
+    }
+}
+
+.wrong-answer-counter{
+    svg path{
+        stroke:#FA0098;
+    }
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.answer-status{
+    width:300px;
+    margin:auto;
+    margin-top:40px;
+}

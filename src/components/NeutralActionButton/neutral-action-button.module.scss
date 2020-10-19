@@ -1,5 +1,5 @@
-.primary-button{
-    background: #00F4CC;
+.neutral-action-button{
+    background: #fa6400;
     padding: 20px;
     border-radius: 50%;
     border:none;
@@ -9,6 +9,9 @@
     a{
         text-decoration: none;
         color:white;
+    }
+    img{
+        height:25px;
     }
 }
 

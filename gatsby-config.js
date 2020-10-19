@@ -43,6 +43,7 @@ module.exports = {
         windowKey: '__PRELOADED_STATE__',
       },
     },
+    `gatsby-plugin-layout`,
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
