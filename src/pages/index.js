@@ -54,7 +54,7 @@ const IndexPage = () => {
 
     const confirmInputs = () => {
         if(fieldsFilled()){
-            navigate('/sabiranje-oduzimanje')
+            navigate(`/${typeOfGame.value}`)
         }
     }
 
@@ -73,7 +73,7 @@ const IndexPage = () => {
                 <div className={styles.centeredItems}>
                     <h1 className={styles.mainHeading}>Kreiraj novi zadatak</h1>
                     <Label text={'Tip zadatka'}>
-                        <SelectField value={typeOfGame} onChange={(value) => setTypeOfGame(value)} options={[
+                        <SelectField value={typeOfGame.value} text={typeOfGame.text} onChange={(value) => setTypeOfGame(value)} options={[
                             {
                                 value: 'sabiranje-oduzimanje',
                                 text: 'Sabiranje Oduzimanje'

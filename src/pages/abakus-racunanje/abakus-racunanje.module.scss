@@ -1,0 +1,9 @@
+.num-image{
+    max-height:200px;
+}
+
+.invisible-preload-images{
+    visibility: hidden;
+    position:fixed;
+    left:-100%;
+}
