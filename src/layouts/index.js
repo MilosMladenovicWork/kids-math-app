@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import {useSelector} from 'react-redux'
+import { navigate } from 'gatsby'
 
 import {
     TransitionGroup,
@@ -21,7 +23,17 @@ const getTransitionStyles = {
   },
 }
 
+
 const Layout = ({children, location}) => {
+    
+    const data = useSelector(state => state)
+
+    useEffect(() => {
+      if(!data.authenticatedUser){
+        navigate('/log-in')
+      }
+    }, [data.authenticatedUser])
+
     return(
         <TransitionGroup>
         <ReactTransition

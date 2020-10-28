@@ -4,7 +4,7 @@ import styles from './primary-button.module.scss'
 
 const PrimaryButton = ({children, onClick, disabled}) => {
     return(
-        <button onClick={() => onClick && !disabled && onClick()} className={`${styles.primaryButton} ${disabled && styles.disabled}`}>
+        <button onClick={(e) => onClick && !disabled && onClick(e)} className={`${styles.primaryButton} ${disabled && styles.disabled}`}>
             {children}
         </button>
     )
