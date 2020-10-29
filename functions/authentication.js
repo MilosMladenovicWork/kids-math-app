@@ -51,6 +51,7 @@ module.exports.handler = function (event, context, callback) {
     // const User = new mongoose.model('User', userSchema);
 
     let authenticated = checkCredentials(data.username, data.pass);
+    console.log(authenticated);
     let authenticationSuccessBody = JSON.stringify({
       status: 'success',
       message: 'Uspešno ste prijavljeni!'
