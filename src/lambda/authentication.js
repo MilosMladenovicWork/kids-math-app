@@ -19,52 +19,50 @@ module.exports.handler = function (event, context, callback) {
       useUnifiedTopology: true
     }).then(() => {
       console.log('connected database')
-    
+      const db = mongoose.connection;
+      db.on('error', function(error){
+        console.log(error)
+        let errorBody = JSON.stringify({
+          status: 'error',
+          message: 'Došlo je do problema na našim serverima, pokušajte kasnije!'
+        });
+        callback(null, {
+          statusCode: 500,
+          body: errorBody
+        })
+      });
+      db.once('open', function () {
+        console.log('hey');
+        const userSchema = new mongoose.Schema({
+          username: String,
+          pass: String
+        });
+        const User = new mongoose.model('User', userSchema);
+        authenticated = checkCredentials(data.username, data.pass);
+        let authenticationSuccessBody = JSON.stringify({
+          status: 'success',
+          message: 'Uspešno ste prijavljeni!'
+        });
+        let authenticationErrorBody = JSON.stringify({
+          status: 'error',
+          message: 'Korisničko ime ili šifra su netačni, pokušajte ponovo!'
+        });
+        callback(null, {
+          statusCode: 200,
+          // http status code
+          body: authenticated ? authenticationSuccessBody : authenticationErrorBody
+        })
+      });
     }).catch(e => {
         console.log(e)
-    //   let errorBody = JSON.stringify({
-    //     status: 'error',
-    //     message: 'Došlo je do problema na našim serverima, pokušajte kasnije!'
-    //   });
-    //   callback(null, {
-    //     statusCode: 500,
-    //     body: errorBody
-    //   })
-    //   console.log(e)
-    });
-    const db = mongoose.connection;
-    db.on('error', function(error){
-      console.log(error)
-      let errorBody = JSON.stringify({
-        status: 'error',
-        message: 'Došlo je do problema na našim serverima, pokušajte kasnije!'
-      });
-      callback(null, {
-        statusCode: 500,
-        body: errorBody
-      })
-    });
-    db.once('open', function () {
-      console.log('hey');
-      const userSchema = new mongoose.Schema({
-        username: String,
-        pass: String
-      });
-      const User = new mongoose.model('User', userSchema);
-      authenticated = checkCredentials(data.username, data.pass);
-      let authenticationSuccessBody = JSON.stringify({
-        status: 'success',
-        message: 'Uspešno ste prijavljeni!'
-      });
-      let authenticationErrorBody = JSON.stringify({
-        status: 'error',
-        message: 'Korisničko ime ili šifra su netačni, pokušajte ponovo!'
-      });
-      callback(null, {
-        statusCode: 200,
-        // http status code
-        body: authenticated ? authenticationSuccessBody : authenticationErrorBody
-      })
+        let errorBody = JSON.stringify({
+            status: 'error',
+            message: 'Došlo je do problema na našim serverima, pokušajte kasnije!'
+        });
+        callback(null, {
+            statusCode: 500,
+            body: errorBody
+        })
     });
     
 };
