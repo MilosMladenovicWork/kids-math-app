@@ -5,7 +5,7 @@ import successSound from '../../sounds/success.wav'
 
 const PrimaryButton = ({children, onClick, disabled}) => {
 
-    const [audio] = useState(new Audio(successSound));
+    const [audio] = useState(typeof window != 'undefined' && new Audio(successSound));
 
     return(
         <button onClick={(e) => {

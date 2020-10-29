@@ -29,7 +29,7 @@ const getTransitionStyles = {
 const Layout = ({children, location}) => {
     
     const data = useSelector(state => state)
-    const [audio] = useState(new Audio(themeSong));
+    const [audio] = useState(typeof window != 'undefined' && new Audio(themeSong));
 
     audio.loop = true
     if(!audio.currentTime){

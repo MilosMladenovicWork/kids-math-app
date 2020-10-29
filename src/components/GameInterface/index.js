@@ -16,8 +16,8 @@ import numberAppearSound from '../../sounds/switch.wav'
 import successSound from '../../sounds/success.wav'
 
 const GameInterface = ({createNumArray}) => {
-    const [audio] = useState(new Audio(numberAppearSound));
-    const [correctAnswerAudio] = useState(new Audio(successSound));
+    const [audio] = useState(typeof window != 'undefined' && new Audio(numberAppearSound));
+    const [correctAnswerAudio] = useState(typeof window != 'undefined' && new Audio(successSound));
     const [resultInput, setResultInput] = useState('')
     const [gameStarted, setGameStarted] = useState(false)
     const [computedResult, setComputedResult] = useState(undefined)

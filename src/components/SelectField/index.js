@@ -6,7 +6,7 @@ import inputSound from '../../sounds/switch.wav'
 const SelectField = ({name, onChange, options, extendTop, value, text}) => {
 
     const [selectFieldClicked, setSelectFieldClicked] = useState(false)
-    const [audio] = useState(new Audio(inputSound));
+    const [audio] = useState(typeof window != 'undefined' && new Audio(inputSound));
 
     return(
                 
