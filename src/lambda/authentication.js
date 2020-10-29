@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 
 const {MONGODB_STRING} = process.env
 
+console.log(MONGODB_STRING)
+
 
 
 module.exports.handler = async function(event, context) {
@@ -16,15 +18,19 @@ module.exports.handler = async function(event, context) {
     
         const data = event.queryStringParameters
     
-        mongoose.connect(MONGODB_STRING, {useNewUrlParser: true, useUnifiedTopology: true});
+        mongoose.connect(MONGODB_STRING, {useNewUrlParser: true, useUnifiedTopology: true})
+        .then(() => console.log('connected database')).catch(e => console.log(e));
 
         const db = mongoose.connection;
         db.on('error', console.error.bind(console, 'connection error:'));
         db.once('open', function() {
+            console.log('hey')
             const userSchema = new mongoose.Schema({
                 username: String,
                 pass: String
             })
+
+            const User = new mongoose.model('User', userSchema)
             
             authenticated = checkCredentials(data.username, data.pass, User)
         });
