@@ -18,7 +18,7 @@ module.exports.handler = function (event, context, callback) {
     const data = event.queryStringParameters;
     mongoose.connect(MONGODB_STRING, {
       useNewUrlParser: true,
-      // useUnifiedTopology: true
+      useUnifiedTopology: true
     }).then(() => console.log('connected database')).catch(e => {
       // let errorBody = JSON.stringify({
       //   status: 'error',
