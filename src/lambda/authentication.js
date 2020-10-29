@@ -45,7 +45,7 @@ module.exports.handler = function (event, context, callback) {
     //     body: errorBody
     //   })
     // });
-    db.once('open', function () {
+    db.once('open', () => {
       console.log('hey');
       // const userSchema = new mongoose.Schema({
       //   username: String,
