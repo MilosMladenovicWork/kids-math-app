@@ -71,10 +71,10 @@ const LogInPage = () => {
                 <h1>Prijavite Se</h1>
                 <div>
                     <div className={styles.input}>
-                        <TextInputField placeholder='Korisničko ime' onChange={setUsername}/>
+                        <TextInputField autocomplete placeholder='Korisničko ime' onChange={setUsername}/>
                     </div>
                     <div className={styles.input}>
-                        <PasswordInputField  placeholder='Šifra' onChange={setPassword}/>
+                        <PasswordInputField autocomplete  placeholder='Šifra' onChange={setPassword}/>
                     </div>
                 </div>
                 {

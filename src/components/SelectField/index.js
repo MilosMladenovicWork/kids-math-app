@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react'
 
 import styles from './select-field.module.scss'
+import inputSound from '../../sounds/switch.wav'
 
 const SelectField = ({name, onChange, options, extendTop, value, text}) => {
 
     const [selectFieldClicked, setSelectFieldClicked] = useState(false)
+    const [audio] = useState(new Audio(inputSound));
 
     return(
                 
-        <div name={name} className={`${styles.selectField}  ${selectFieldClicked && styles.selectFieldExtended}`} onClick={() => setSelectFieldClicked(prevState => !prevState)}>
+        <div name={name} className={`${styles.selectField}  ${selectFieldClicked && styles.selectFieldExtended}`} onClick={() => {audio.pause();audio.currentTime = 0.05;audio.play();setSelectFieldClicked(prevState => !prevState)}}>
             <div className={styles.selectedValue}>
                 {text ? text : <span className={styles.placeholder}>Odaberi</span>}
             </div>

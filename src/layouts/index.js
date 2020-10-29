@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
 import { navigate } from 'gatsby'
-
 import {
     TransitionGroup,
     Transition as ReactTransition,
 } from "react-transition-group"
+
+import styles from './layout.module.scss'
+import themeSong from '../sounds/theme-song.mp3'
 
 const timeout = 450
 const getTransitionStyles = {
@@ -27,6 +29,13 @@ const getTransitionStyles = {
 const Layout = ({children, location}) => {
     
     const data = useSelector(state => state)
+    const [audio] = useState(new Audio(themeSong));
+
+    audio.loop = true
+    if(!audio.currentTime){
+      audio.play()
+    }
+    
 
     useEffect(() => {
       if(!data.authenticatedUser){
@@ -45,6 +54,7 @@ const Layout = ({children, location}) => {
         >
           {status => (
             <div
+              className={styles.layoutWrapper}
               style={{
                 ...getTransitionStyles[status],
               }}

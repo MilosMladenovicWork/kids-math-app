@@ -12,9 +12,12 @@ import OpacityChangeContainer from '../../components/OpacityChangeContainer'
 import NeutralActionButton from '../../components/NeutralActionButton'
 import backArrowImg from '../../img/back-arrow.svg'
 import CountSticker from '../../components/CountSticker'
+import numberAppearSound from '../../sounds/switch.wav'
+import successSound from '../../sounds/success.wav'
 
 const GameInterface = ({createNumArray}) => {
-    
+    const [audio] = useState(new Audio(numberAppearSound));
+    const [correctAnswerAudio] = useState(new Audio(successSound));
     const [resultInput, setResultInput] = useState('')
     const [gameStarted, setGameStarted] = useState(false)
     const [computedResult, setComputedResult] = useState(undefined)
@@ -33,6 +36,7 @@ const GameInterface = ({createNumArray}) => {
     useEffect(() => {
         createNumArray(setNumbers, setComputedResult)
         if(gameStarted){
+            audio.play()
             setCurrentTask(prevState => {
                 return prevState + 1
             })
@@ -42,7 +46,8 @@ const GameInterface = ({createNumArray}) => {
     const changeActiveNumIndex = () =>{
         return setInterval(() => {
             if(!numbersAppeared){
-            setActiveNumIndex((prevState) => {
+                audio.play()
+                setActiveNumIndex((prevState) => {
                     return prevState + 1
                 })
             }
@@ -52,6 +57,7 @@ const GameInterface = ({createNumArray}) => {
     useEffect(() => {
         if(activeNumIndex >= data.numberOfNumbersPerTask){
             setNumbersAppeared(true)
+            audio.pause()
         }
     }, [activeNumIndex])
 
@@ -72,6 +78,7 @@ const GameInterface = ({createNumArray}) => {
     const checkResult = () => {
         setCorrectAnswer(computedResult == resultInput)
         if(computedResult == resultInput){
+            correctAnswerAudio.play()
             setNumOfCorrectAnswers(prevState => prevState + 1)
         }else{
             setNumOfIncorrectAnswers(prevState => prevState + 1)
@@ -91,6 +98,7 @@ const GameInterface = ({createNumArray}) => {
     useEffect(() => {
         if(currentTask == data.numberOfTasksPerGame && correctAnswer != undefined){
             setTimeout(() => {
+                correctAnswerAudio.play()
                 setFinishedGame(true)
             }, 2000)
         }

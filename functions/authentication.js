@@ -15,12 +15,20 @@ console.log(MONGODB_STRING);
 module.exports.handler = function (event, context, callback) {
   const data = event.queryStringParameters;
   context.callbackWaitsForEmptyEventLoop = false;
-  run().then(res => {
+  run(data).then(res => {
     callback(null, res);
   }).catch(error => callback(error));
 };
 
-function run() {
+const goodCredentials = async (username, password, Model) => {
+  let user = await Model.find({
+    username: username,
+    pass: password
+  });
+  return user.length > 0;
+};
+
+function run(data) {
   return co(function* () {
     if (conn == null) {
       conn = yield mongoose.createConnection(MONGODB_STRING, {
@@ -29,35 +37,37 @@ function run() {
         useUnifiedTopology: true,
         useNewUrlParser: true
       });
-      conn.model('User', new mongoose.Schema({
+      conn.model('users', new mongoose.Schema({
         username: String,
         pass: String
       }));
     }
 
     const User = conn.model('users');
-    let authenticated = checkCredentials(data.username, data.pass);
-    let authenticationSuccessBody = JSON.stringify({
-      status: 'success',
-      message: 'Uspešno ste prijavljeni!'
-    });
-    let authenticationErrorBody = JSON.stringify({
-      status: 'error',
-      message: 'Korisničko ime ili šifra su netačni, pokušajte ponovo!'
-    });
-    console.log(authenticationSuccessBody); //   const doc = yield User.find();
+    let authenticated = yield goodCredentials(data.username, data.pass, User);
+    let response;
 
-    const response = {
-      statusCode: 200,
-      body: authenticated ? authenticationSuccessBody : authenticationErrorBody
-    };
+    if (authenticated) {
+      response = {
+        statusCode: 200,
+        body: JSON.stringify({
+          status: 'success',
+          message: 'Uspešno ste prijavljeni!'
+        })
+      };
+    } else {
+      response = {
+        statusCode: 200,
+        body: JSON.stringify({
+          status: 'error',
+          message: 'Korisničko ime ili šifra su netačni, pokušajte ponovo!'
+        })
+      };
+    }
+
     return response;
   });
-} //     const checkCredentials = (username, password) => {
-//       return username == 'admin' && password == 'admin';
-//     };
-// const data = event.queryStringParameters;
-//     mongoose.connect(MONGODB_STRING, {
+} //     mongoose.connect(MONGODB_STRING, {
 //       useNewUrlParser: true,
 //       useUnifiedTopology: true
 //     })
