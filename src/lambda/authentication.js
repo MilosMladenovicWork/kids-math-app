@@ -27,7 +27,7 @@ module.exports.handler = function (event, context, callback) {
             status: 'error',
             message: 'Došlo je do problema na našim serverima, pokušajte kasnije!'
         });
-        callback(null, {
+        return callback(null, {
             statusCode: 500,
             body: errorBody
         })
@@ -53,18 +53,17 @@ module.exports.handler = function (event, context, callback) {
       // });
       // const User = new mongoose.model('User', userSchema);
       let authenticated = checkCredentials(data.username, data.pass);
-      console.log(authenticated)
       let authenticationSuccessBody = JSON.stringify({
-        status: 'success',
-        message: 'Uspešno ste prijavljeni!'
-      });
-      let authenticationErrorBody = JSON.stringify({
-        status: 'error',
-        message: 'Korisničko ime ili šifra su netačni, pokušajte ponovo!'
-      });
-      callback(null, {
+          status: 'success',
+          message: 'Uspešno ste prijavljeni!'
+        });
+        let authenticationErrorBody = JSON.stringify({
+            status: 'error',
+            message: 'Korisničko ime ili šifra su netačni, pokušajte ponovo!'
+        });
+        console.log(authenticationSuccessBody)
+      return callback(null, {
         statusCode: 200,
-        // http status code
         body: authenticated ? authenticationSuccessBody : authenticationErrorBody
       })
 });
