@@ -2,6 +2,8 @@ import React,{useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
 import { navigate, Link } from 'gatsby'
 import GameInterface from '../../components/GameInterface'
+import Background from '../../components/Background'
+import gameBackground from '../../img/game-background.jpg'
 
 const SabiranjeOduzimanjePage = () => {
 
@@ -39,6 +41,7 @@ const SabiranjeOduzimanjePage = () => {
 
     return(
         <main>
+            <Background img={gameBackground}/>
             <GameInterface createNumArray={createNumArray}/>
         </main>
     )

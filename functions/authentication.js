@@ -10,7 +10,6 @@ let conn = null;
 const {
   MONGODB_STRING
 } = process.env;
-console.log(MONGODB_STRING);
 
 module.exports.handler = function (event, context, callback) {
   const data = event.queryStringParameters;

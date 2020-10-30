@@ -1,5 +1,27 @@
 .layout-wrapper{
-    width:100%;
+    width:100vw;
     height:100vh;
     overflow: hidden;
+    position: relative;
+}
+
+.text-line-through{
+    position: relative;
+}
+
+.music-button{
+    position:absolute;
+    bottom:50px;
+    right:50px;
+}
+
+.text-line-through::after{
+    content:'';
+    width:calc(100% + 10px);
+    height:2px;
+    transform:translate(-50%, -50%) rotate(20deg);
+    position:absolute;
+    top:50%;
+    left:50%;
+    background: white;
 }

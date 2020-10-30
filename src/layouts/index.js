@@ -9,6 +9,7 @@ import {
 import styles from './layout.module.scss'
 import themeSong from '../sounds/theme-song.mp3'
 import AudioProxy from '../utils/AudioProxy'
+import NeutralActionButton from '../components/NeutralActionButton'
 
 const timeout = 450
 const getTransitionStyles = {
@@ -31,11 +32,18 @@ const Layout = ({children, location}) => {
     
     const data = useSelector(state => state)
     const [audio] = useState(new AudioProxy(themeSong));
-
+    const [musicToggled, setMusicToggled] = useState(true)
+    
     audio.loop = true
-    if(!audio.currentTime){
-      audio.play()
-    }
+
+    useEffect(() => {
+      if(!audio.currentTime && musicToggled){
+        audio.play()
+      }else{
+        audio.pause()
+      }
+    }, [musicToggled])
+
     
 
     useEffect(() => {
@@ -61,6 +69,11 @@ const Layout = ({children, location}) => {
               }}
             >
                 {children}
+                <div className={styles.musicButton}>
+                  <NeutralActionButton onClick={() => setMusicToggled(prevState => !prevState)}>
+                    <span className={!musicToggled && styles.textLineThrough}>Music</span>
+                  </NeutralActionButton>
+                </div>
             </div>
           )}
         </ReactTransition>

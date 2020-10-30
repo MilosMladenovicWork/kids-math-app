@@ -6,6 +6,8 @@ import styles from './log-in.module.scss'
 import TextInputField from '../../components/TextInputField'
 import PasswordInputField from '../../components/PasswordInputField'
 import PrimaryButton from '../../components/PrimaryButton'
+import Background from '../../components/Background'
+import gameBackground from '../../img/game-background.jpg'
 
 const LogInPage = () => {
 
@@ -67,6 +69,7 @@ const LogInPage = () => {
 
     return(
         <main>
+            <Background img={gameBackground}/>
             <form className={styles.logInForm}>
                 <h1>Prijavite Se</h1>
                 <div>

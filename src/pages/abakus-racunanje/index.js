@@ -6,6 +6,8 @@ import GameInterface from '../../components/GameInterface'
 import numberOne from '../../img/number-one.png'
 import numberTwo from '../../img/number-two.png'
 import numberTen from '../../img/number-ten.jpg'
+import Background from '../../components/Background'
+import gameBackground from '../../img/game-background.jpg'
 
 const numbers = [
     {
@@ -68,6 +70,7 @@ const AbakusRacunanjePage = () => {
 
     return(
         <main>
+            <Background img={gameBackground}/>
             <div className={styles.invisiblePreloadImages}>
                 {numbers.map(number => <img src={number.img} alt=''/>)}
             </div>

@@ -37,6 +37,7 @@ const GameInterface = ({createNumArray}) => {
     useEffect(() => {
         createNumArray(setNumbers, setComputedResult)
         if(gameStarted){
+            audio.currentTime = 0.05
             audio.play()
             setCurrentTask(prevState => {
                 return prevState + 1
@@ -47,6 +48,7 @@ const GameInterface = ({createNumArray}) => {
     const changeActiveNumIndex = () =>{
         return setInterval(() => {
             if(!numbersAppeared){
+                audio.currentTime = 0.05
                 audio.play()
                 setActiveNumIndex((prevState) => {
                     return prevState + 1
