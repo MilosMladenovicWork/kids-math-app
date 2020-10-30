@@ -8,6 +8,7 @@ import {
 
 import styles from './layout.module.scss'
 import themeSong from '../sounds/theme-song.mp3'
+import AudioProxy from '../utils/AudioProxy'
 
 const timeout = 450
 const getTransitionStyles = {
@@ -29,7 +30,7 @@ const getTransitionStyles = {
 const Layout = ({children, location}) => {
     
     const data = useSelector(state => state)
-    const [audio] = useState(typeof window != 'undefined' && new Audio(themeSong));
+    const [audio] = useState(new AudioProxy(themeSong));
 
     audio.loop = true
     if(!audio.currentTime){

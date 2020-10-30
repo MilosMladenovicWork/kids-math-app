@@ -2,10 +2,11 @@ import React, {useState} from 'react'
 
 import styles from './primary-button.module.scss'
 import successSound from '../../sounds/success.wav'
+import AudioProxy from '../../utils/AudioProxy'
 
 const PrimaryButton = ({children, onClick, disabled}) => {
 
-    const [audio] = useState(typeof window != 'undefined' && new Audio(successSound));
+    const [audio] = useState(new AudioProxy(successSound));
 
     return(
         <button onClick={(e) => {

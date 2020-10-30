@@ -14,10 +14,11 @@ import backArrowImg from '../../img/back-arrow.svg'
 import CountSticker from '../../components/CountSticker'
 import numberAppearSound from '../../sounds/switch.wav'
 import successSound from '../../sounds/success.wav'
+import AudioProxy from '../../utils/AudioProxy'
 
 const GameInterface = ({createNumArray}) => {
-    const [audio] = useState(typeof window != 'undefined' && new Audio(numberAppearSound));
-    const [correctAnswerAudio] = useState(typeof window != 'undefined' && new Audio(successSound));
+    const [audio] = useState(new AudioProxy(numberAppearSound));
+    const [correctAnswerAudio] = useState(new AudioProxy(successSound));
     const [resultInput, setResultInput] = useState('')
     const [gameStarted, setGameStarted] = useState(false)
     const [computedResult, setComputedResult] = useState(undefined)

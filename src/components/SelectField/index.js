@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react'
 
 import styles from './select-field.module.scss'
 import inputSound from '../../sounds/switch.wav'
+import AudioProxy from '../../utils/AudioProxy'
 
 const SelectField = ({name, onChange, options, extendTop, value, text}) => {
 
     const [selectFieldClicked, setSelectFieldClicked] = useState(false)
-    const [audio] = useState(typeof window != 'undefined' && new Audio(inputSound));
+    const [audio] = useState(new AudioProxy(inputSound));
 
     return(
                 
