@@ -20,6 +20,12 @@ const LogInPage = () => {
     const [errorMessage, setErrorMessage] = useState(undefined)
     const [successMessage, setSuccessMessage] = useState(undefined)
 
+    const activateThemeSong = () => {
+      if(!data.themeSongPlaying){
+        dispatch({type:'TOGGLE_THEME_SONG'})
+      }
+    }
+
     useEffect(() => {
         if(data.authenticatedUser){
           navigate('/')
@@ -52,6 +58,7 @@ const LogInPage = () => {
             .then((data) => {
               setSubmiting(false)
               if (data.status == 'success') {
+                activateThemeSong()
                 dispatch({type:'AUTHENTICATED'})
                 return setSuccessMessage(data.message)
               } else if (data.status == 'error') {

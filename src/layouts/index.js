@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import { navigate } from 'gatsby'
 import {
     TransitionGroup,
@@ -30,19 +30,19 @@ const getTransitionStyles = {
 
 const Layout = ({children, location}) => {
     
+    const dispatch = useDispatch()
     const data = useSelector(state => state)
     const [audio] = useState(new AudioProxy(themeSong));
-    const [musicToggled, setMusicToggled] = useState(true)
-    
+
     audio.loop = true
 
     useEffect(() => {
-      if(!audio.currentTime && musicToggled){
+      if(!audio.currentTime && data.themeSongPlaying){
         audio.play()
       }else{
         audio.pause()
       }
-    }, [musicToggled])
+    }, [data.themeSongPlaying])
 
     
 
@@ -70,8 +70,8 @@ const Layout = ({children, location}) => {
             >
                 {children}
                 <div className={styles.musicButton}>
-                  <NeutralActionButton onClick={() => setMusicToggled(prevState => !prevState)}>
-                    <span className={!musicToggled && styles.textLineThrough}>Music</span>
+                  <NeutralActionButton onClick={() => dispatch({type:'TOGGLE_THEME_SONG'})}>
+                    <span className={!data.themeSongPlaying && styles.textLineThrough}>Music</span>
                   </NeutralActionButton>
                 </div>
             </div>
