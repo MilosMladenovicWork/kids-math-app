@@ -8,6 +8,8 @@ import {
 
 import styles from './layout.module.scss'
 import themeSong from '../sounds/theme-song.mp3'
+import themeSong2 from '../sounds/theme-song-2.mp3'
+import themeSong3 from '../sounds/theme-song-3.mp3'
 import AudioProxy from '../utils/AudioProxy'
 import NeutralActionButton from '../components/NeutralActionButton'
 
@@ -30,9 +32,11 @@ const getTransitionStyles = {
 
 const Layout = ({children, location}) => {
     
+    const themeSongs = [themeSong, themeSong2, themeSong3]
+
     const dispatch = useDispatch()
     const data = useSelector(state => state)
-    const [audio] = useState(new AudioProxy(themeSong));
+    const [audio] = useState(new AudioProxy(themeSongs[Math.floor(Math.random() * themeSongs.length)]));
 
     audio.loop = true
 
