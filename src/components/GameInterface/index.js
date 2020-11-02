@@ -114,57 +114,62 @@ const GameInterface = ({createNumArray}) => {
                     <img src={backArrowImg} alt='go back'/>
                 </NeutralActionButton>
             </nav>
-            <div className={styles.nextTaskButton}>
-                <NeutralActionButton disabled={gameStarted || finishedGame ? true : false} onClick={() => !gameStarted && setGameStarted(prevState => !prevState)}>
-                    {
-                        currentTask == 0 ?
-                        'POČNI'
-                        :
-                        'SLEDEĆI'
-                    }
-                </NeutralActionButton>
-            </div>
-            <NumberAppearContainer>
-                <div className={styles.blankArea}>
-                    {
-                        numbers && gameStarted &&
-                        <OpacityChangeContainer key={activeNumIndex}>
-                            {numbers[activeNumIndex]}
-                        </OpacityChangeContainer>
-                    }
-                    {
-                        !gameStarted && correctAnswer != undefined && (correctAnswer ? 
-                            <AppearAndDisappearContainer key={'Correct'}>TAČNO</AppearAndDisappearContainer>
-                            :
-                            <AppearAndDisappearContainer key={'Incorrect'}>NETAČNO</AppearAndDisappearContainer>
-                        )
-                    }
-                    {
-                        finishedGame && <AppearAndDisappearContainer>
-                            KRAJ VEŽBE
-                        </AppearAndDisappearContainer>
-                    }
-                </div>
-                <div className={styles.resultBar}>
-                    <Label text='Rezultat' row>
-                        <NumberInputField value={resultInput} onChange={(value) => setResultInput(value)}/>
-                    </Label>
-                    <PrimaryButton onClick={() => checkResult()} disabled={numbersAppeared ? false : true}>
-                        UNESI
-                    </PrimaryButton>
-                </div>
-            </NumberAppearContainer>
-            <div className={`${styles.row} ${styles.answerStatus}`}>
-                <CountSticker count={numOfCorrectAnswers}>
-                    <div className={styles.correctAnswerCounter}>
-                        <svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Checkmark Circle</title><path d='M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z' fill='none' stroke='currentColor' stroke-miterlimit='10' stroke-width='32'/><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32' d='M352 176L217.6 336 160 272'/></svg>
+            <div className={styles.verticallyCentered}>
+                <div>
+
+                    <div className={styles.nextTaskButton}>
+                        <NeutralActionButton disabled={gameStarted || finishedGame ? true : false} onClick={() => !gameStarted && setGameStarted(prevState => !prevState)}>
+                            {
+                                currentTask == 0 ?
+                                'POČNI'
+                                :
+                                'SLEDEĆI'
+                            }
+                        </NeutralActionButton>
                     </div>
-                </CountSticker>
-                <CountSticker count={numOfIncorrectAnswers}>
-                    <div className={styles.wrongAnswerCounter}>
-                        <svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close Circle</title><path d='M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z' fill='none' stroke='currentColor' stroke-miterlimit='10' stroke-width='32'/><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32' d='M320 320L192 192M192 320l128-128'/></svg>
+                    <NumberAppearContainer>
+                        <div className={styles.blankArea}>
+                            {
+                                numbers && gameStarted &&
+                                <OpacityChangeContainer key={activeNumIndex}>
+                                    {numbers[activeNumIndex]}
+                                </OpacityChangeContainer>
+                            }
+                            {
+                                !gameStarted && correctAnswer != undefined && (correctAnswer ? 
+                                    <AppearAndDisappearContainer key={'Correct'}>TAČNO</AppearAndDisappearContainer>
+                                    :
+                                    <AppearAndDisappearContainer key={'Incorrect'}>NETAČNO</AppearAndDisappearContainer>
+                                )
+                            }
+                            {
+                                finishedGame && <AppearAndDisappearContainer>
+                                    KRAJ VEŽBE
+                                </AppearAndDisappearContainer>
+                            }
+                        </div>
+                        <div className={styles.resultBar}>
+                            <Label text='Rezultat' row>
+                                <NumberInputField value={resultInput} onChange={(value) => setResultInput(value)}/>
+                            </Label>
+                            <PrimaryButton onClick={() => checkResult()} disabled={numbersAppeared ? false : true}>
+                                UNESI
+                            </PrimaryButton>
+                        </div>
+                    </NumberAppearContainer>
+                    <div className={`${styles.row} ${styles.answerStatus}`}>
+                        <CountSticker count={numOfCorrectAnswers}>
+                            <div className={styles.correctAnswerCounter}>
+                                <svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Checkmark Circle</title><path d='M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z' fill='none' stroke='currentColor' stroke-miterlimit='10' stroke-width='32'/><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32' d='M352 176L217.6 336 160 272'/></svg>
+                            </div>
+                        </CountSticker>
+                        <CountSticker count={numOfIncorrectAnswers}>
+                            <div className={styles.wrongAnswerCounter}>
+                                <svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close Circle</title><path d='M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z' fill='none' stroke='currentColor' stroke-miterlimit='10' stroke-width='32'/><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32' d='M320 320L192 192M192 320l128-128'/></svg>
+                            </div>
+                        </CountSticker>
                     </div>
-                </CountSticker>
+                </div>
             </div>
         </React.Fragment>
     )

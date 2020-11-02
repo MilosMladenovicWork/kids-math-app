@@ -1,3 +1,5 @@
+@import "../../styles/utils/breakpoints.scss";
+
 .number-input-field{
     font-size:1.25rem;
     position:relative;
@@ -7,4 +9,7 @@
     border-radius: 5px;
     border:none;
     outline: none;
+    @include breakpoint(xs){
+        max-width:60%;
+    }
 }

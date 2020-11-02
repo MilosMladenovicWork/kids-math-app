@@ -63,7 +63,7 @@ const IndexPage = () => {
     }
 
     return(
-        <main>
+        <main className={styles.verticallyCentered}>
             <div className={styles.background}>
                 {typeof window != 'undefined' &&
                     <BackgroundCanvasMemo/>

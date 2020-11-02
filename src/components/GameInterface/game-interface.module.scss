@@ -1,7 +1,8 @@
+@import '../../styles/utils/breakpoints.scss';
+
 .next-task-button{
     text-align: center;
-    margin-top:10vh;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .blank-area{
@@ -24,12 +25,16 @@
     padding-bottom: 15px;
     background: #E5E5FF;
     border-radius: 20px;
+    @include breakpoint(xs){
+        flex-direction:column;
+        align-items:center;
+    }
 }
 
 .game-navigation{
     position:absolute;
-    top:20px;
-    left:20px;
+    top:10px;
+    left:10px;
 }
 
 .correct-answer-counter{
@@ -47,10 +52,20 @@
 .row{
     display: flex;
     justify-content: space-between;
+    @include breakpoint(xs){
+        max-width:60vw;
+    }
 }
 
 .answer-status{
     width:300px;
     margin:auto;
     margin-top:40px;
+}
+
+.vertically-centered{
+    min-height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

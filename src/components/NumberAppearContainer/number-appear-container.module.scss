@@ -1,10 +1,17 @@
+@import "../../styles/utils/breakpoints.scss";
+
 .number-appear-container{
     margin:auto;    
     width:600px;
-    height: 400px;
+    max-height: 60vh;
+    height:400px;
     border-radius: 20px;
     background: purple;
     padding:25px;
     display: flex;
     flex-direction: column;
+    @include breakpoint(xs){
+        width:80%;
+        max-height:50vh;
+    }
 }

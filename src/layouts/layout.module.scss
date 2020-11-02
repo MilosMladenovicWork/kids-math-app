@@ -1,8 +1,14 @@
+@import '../styles/utils/breakpoints.scss';
+
 .layout-wrapper{
     width:100vw;
     height:100vh;
     overflow: hidden;
     position: relative;
+    @include breakpoint(xs){
+        min-height: 100vh;
+        height:auto;
+    }
 }
 
 .text-line-through{
@@ -10,9 +16,13 @@
 }
 
 .music-button{
-    position:absolute;
+    position:fixed;
     bottom:50px;
     right:50px;
+    @include breakpoint(xs){
+        bottom:10px;
+        right:10px;
+    }
 }
 
 .text-line-through::after{
