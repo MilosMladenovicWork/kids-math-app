@@ -1,5 +1,10 @@
+@import "../../styles/utils/breakpoints.scss";
+
 .num-image{
     max-height:200px;
+    @include breakpoint(xs){
+        max-height: 85px;
+    }
 }
 
 .invisible-preload-images{

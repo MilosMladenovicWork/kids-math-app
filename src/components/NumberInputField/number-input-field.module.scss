@@ -10,6 +10,6 @@
     border:none;
     outline: none;
     @include breakpoint(xs){
-        max-width:60%;
+        width:100%;
     }
 }

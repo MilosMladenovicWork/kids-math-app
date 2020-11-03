@@ -1,5 +1,11 @@
+@import "../../styles/utils/breakpoints.scss";
+
 .background-canvas{
     width:100%;
     height:100vh;
     overflow: hidden;
+    @include breakpoint(xs){
+        height:auto;
+        min-height: 100%;
+    }
 }

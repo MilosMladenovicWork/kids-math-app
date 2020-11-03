@@ -97,7 +97,7 @@ const BackgroundCanvas = () => {
     let canvasWidth, canvasHeight;
     if(typeof window != 'undefined'){
         canvasWidth = window.innerWidth;
-        canvasHeight = window.innerHeight;
+        canvasHeight = document.body.clientHeight;
     }
 
     const number1 = new MathNumber(Math.floor(Math.random() * (canvasWidth + 1)), Math.floor(Math.random() * (canvasHeight + 1)), 1, 60, '#2A095F', canvasWidth, canvasHeight, false, false)

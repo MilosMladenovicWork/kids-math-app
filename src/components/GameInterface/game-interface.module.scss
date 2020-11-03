@@ -15,6 +15,9 @@
     justify-content: center;
     font-size:72px;
     color:#2A095F;
+    @include breakpoint(xs){
+        font-size:3rem;
+    }
 }
 
 .result-bar{
@@ -26,6 +29,7 @@
     background: #E5E5FF;
     border-radius: 20px;
     @include breakpoint(xs){
+        padding:10px 10px;
         flex-direction:column;
         align-items:center;
     }
@@ -61,6 +65,9 @@
     width:300px;
     margin:auto;
     margin-top:40px;
+    @include breakpoint(xs){
+        padding-bottom:35px;
+    }
 }
 
 .vertically-centered{

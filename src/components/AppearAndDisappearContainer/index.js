@@ -11,7 +11,7 @@ const AppearAndDisappearContainer = ({children}) => {
     })
 
     return (
-        <animated.div style={{
+        <animated.div className={styles.appearAndDisappearContainer} style={{
             transform:scale.interpolate((scale) => `scale(${scale})`)
         }}>
             {children}

@@ -100,18 +100,18 @@ const IndexPage = () => {
                             <NumberInputField value={speed} onChange={(value) => setSpeed(value)}/>
                         </Label>
                     </div>
-                    <div className={styles.rowContainer}>
-                        <SecondaryButton onClick={() => {
-                            cancelInputs()
-                        }}>
-                            OTKAŽI
-                        </SecondaryButton>
-                        <PrimaryButton onClick={() => {
-                            confirmInputs()
-                        }}>
-                            POČNI
-                        </PrimaryButton>
-                    </div>
+                        <div className={`${styles.rowContainer} ${styles.buttonsContainer}`}>
+                            <SecondaryButton onClick={() => {
+                                cancelInputs()
+                            }}>
+                                OTKAŽI
+                            </SecondaryButton>
+                            <PrimaryButton onClick={() => {
+                                confirmInputs()
+                            }}>
+                                POČNI
+                            </PrimaryButton>
+                        </div>
                 </div>
             </div>
         </main>
